@@ -1,0 +1,91 @@
+﻿<Page
+    x:Class="HackerNewsDaily.Views.CommentThreadView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HackerNewsDaily.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:HackerNewsDaily.Controls"
+    xmlns:viewModels="using:HackerNewsDaily.ViewModels"
+    xmlns:converters="using:HackerNewsDaily.Converters"
+    d:DataContext="{d:DesignInstance viewModels:CommentThreadViewModel, IsDesignTimeCreatable=False}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:IndentConverter x:Name="IndentConverter" />
+        <converters:ColorToBrushConverter x:Name="ColorToBrushConverter"/>
+    </Page.Resources>
+    
+    <Grid Background="{StaticResource StoryPanelBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="{StaticResource HeaderBarBackgroundBrush}"
+                Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="HNDaily"
+                           Foreground="{StaticResource HeaderBarTextBrush}"
+                           Margin="4,0,0,0"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           FontFamily="Segoe WP"
+                           FontSize="30"
+                           FontWeight="Light"
+                           Height="40"
+                           Grid.Column="0"/>
+
+                <Rectangle Fill="{StaticResource HeaderBarTextBrush}"
+                           Width="20"
+                           Height="20"
+                           HorizontalAlignment="Right"
+                           Grid.Column="1"/>
+            </Grid>
+
+        </Border>
+        <ListBox ScrollViewer.VerticalScrollMode="Enabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 Grid.Row="1"
+                 Padding="4,0,4,0"
+                 Background="{StaticResource StoryPanelBackgroundBrush}"
+                 ItemsSource="{Binding Comments}"
+                 IsHoldingEnabled="False"
+                 IsTapEnabled="False"
+                 VerticalAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="{Binding Converter={StaticResource IndentConverter}, ConverterParameter=2}" IsTapEnabled="False">
+                        <TextBlock Foreground="{StaticResource CommentHeaderBrush}" Margin="0,0,0,1">
+                            <Run Text="{Binding By}"/>
+                            <Run Text=" | "/>
+                            <Run Text="{Binding DisplayTime}"/>
+                            <Run Text=" - indent: "/>
+                            <Run Text="{Binding IndentLevel}"/>
+                        </TextBlock>
+                        <RichTextBlock Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
+                                       TextWrapping="WrapWholeWords"
+                                       controls:Xamlify.Html="{Binding Text}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ProgressRing Grid.Row="1"
+                      IsActive="{Binding IsUpdating}"
+                      Background="#33000000"
+                      Foreground="{StaticResource StoryPanelTextBrush}"
+                      Visibility="{Binding IsUpdating, Converter={StaticResource BooleanToVisibility}}"/>
+    </Grid>
+</Page>

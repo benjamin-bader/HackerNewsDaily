@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ebb9b821-5829-484e-86a3-ede35883994b</SharedGUID>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>HackerNewsDaily</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)AtomicBool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Xamlify.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\IndentConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\NetworkUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Serialization\UnixTimeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\Analytics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\HackerNewsHtmlClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\NullCrashReporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\IAnalytics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\ICrashReporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Services\IHackerNewsClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Comment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CommentThread.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IIndentable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TopStory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CommentThreadViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HomeViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ScreenWithAnalytics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TopStoryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CommentThreadView.xaml.cs">
+      <DependentUpon>CommentThreadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\hn.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\CommentThreadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)SampleData\" />
+  </ItemGroup>
+</Project>
